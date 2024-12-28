@@ -1,0 +1,39 @@
+.navContainer {
+  background-color: lightsalmon;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  color: white;
+  box-sizing: border-box;
+  height: 100px;
+  justify-content: space-between;
+}
+.navLeft {
+}
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.btnLink {
+  text-decoration: none;
+
+  width: 80px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  gap: 5px;
+  font-size: smaller;
+}
+.btnLink:hover {
+  background-color: grey;
+  transition: 0.3s ease-in-out;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}

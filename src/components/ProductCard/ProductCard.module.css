@@ -1,0 +1,43 @@
+.card {
+  background-color: whitesmoke;
+  width: 350px;
+  height: 650px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 10px;
+  justify-content: space-between;
+}
+.imgContainer {
+  box-sizing: border-box;
+  width: 300px;
+  height: 350x;
+}
+.cardImg {
+  object-fit: contain;
+  width: 100%;
+  border-radius: 10px;
+}
+.cardDetails {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cardBtn {
+  background-color: lightsalmon;
+  width: 85%;
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.cardBtn:hover {
+  background-color: gray;
+  transition: 0.3s ease-in-out;
+}
