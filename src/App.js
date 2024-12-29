@@ -12,10 +12,13 @@ import Order from "./pages/Order/Order";
 import Cart from "./pages/Cart/Cart";
 
 // custom context
-import { useAuth } from "./components/context/authContext";
 import ProductProvider from "./components/context/productContext";
 import CartProvider from "./components/context/cartContext";
 import OrderProvider from "./components/context/orderContext";
+
+// redux
+import { useSelector } from "react-redux";
+import { userSelector } from "./redux/reducers/userReducer";
 
 // react router
 import {
@@ -27,7 +30,7 @@ import {
 //******************************************************************** */
 // App component start
 function App() {
-  const { activeUser } = useAuth();
+  const activeUser = useSelector(userSelector);
 
   // private route
   const PrivateRoute = ({ children }) => {
