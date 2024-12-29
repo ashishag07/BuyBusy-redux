@@ -6,10 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 // internal modules
 import styles from "./Login.module.css";
 
-// custom components
-
-// custom context
-import { useAuth } from "../../components/context/authContext";
+// redux
+import { userActions } from "../../redux/reducers/userReducer";
+import { useDispatch } from "react-redux";
 
 // database
 import { db } from "../../firebaseInit";
@@ -17,7 +16,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 
 //----------------------------------
 function Login() {
-  const { setActiveUser } = useAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const emailRef = useRef();
@@ -38,8 +37,8 @@ function Login() {
       toast.error("Wrong Password !!");
       return;
     }
-
-    setActiveUser(currentUser);
+    dispatch(userActions.setActiveUser(currentUser));
+    // setActiveUser(currentUser);
 
     toast.success(`Welcome ${currentUser.name}`);
     navigate("/");

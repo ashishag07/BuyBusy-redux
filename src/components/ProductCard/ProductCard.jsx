@@ -5,13 +5,17 @@ import styles from "./ProductCard.module.css";
 import { Link } from "react-router-dom";
 
 // custom context
-import { useAuth } from "../context/authContext";
+
 import { useCartValue } from "../context/cartContext";
+
+// redux
+import { useSelector } from "react-redux";
+import { userSelector } from "../../redux/reducers/userReducer";
 
 //--------------------------------------------------------
 function ProductCard({ product }) {
   const { addToCart } = useCartValue();
-  const { activeUser } = useAuth();
+  const activeUser = useSelector(userSelector);
 
   return (
     <div className={styles.card}>

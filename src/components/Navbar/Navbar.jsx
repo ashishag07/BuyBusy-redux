@@ -13,18 +13,18 @@ import LoginIcon from "@mui/icons-material/Login";
 // internal modules
 import styles from "./Navbar.module.css";
 
-// custom components
-
-// custom context
-import { useAuth } from "../context/authContext";
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { userActions, userSelector } from "../../redux/reducers/userReducer";
 
 //--------------------------------------------------------------
 function Navbar() {
-  const { activeUser, setActiveUser } = useAuth();
+  const activeUser = useSelector(userSelector);
+  const dispatch = useDispatch();
   const navigateToLogin = useNavigate();
 
   const logout = () => {
-    setActiveUser(null);
+    dispatch(userActions.setActiveUser(null));
     navigateToLogin("/login");
   };
 
