@@ -29,8 +29,8 @@ const CartProvider = ({ children }) => {
       );
       setCartItems(newArray);
     } else {
-      product.qty = 1;
-      setCartItems((prev) => [...prev, product]);
+      const newProduct = { ...product, qty: 1 };
+      setCartItems((prev) => [...prev, newProduct]);
     }
 
     toast.success("Item is added to the Cart");
