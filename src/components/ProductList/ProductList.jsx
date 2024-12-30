@@ -1,17 +1,17 @@
-// external modules
-
 // internal modules
 import styles from "./ProductList.module.css";
 
 // custom component
 import ProductCard from "../ProductCard/ProductCard";
 
-// custom context
-import { useProductValue } from "../context/productContext";
+// redux
+import { useSelector } from "react-redux";
+import { productSelector } from "../../redux/reducers/productReducer";
 
 //-----------------------------------------------------
 function ProductList() {
-  const { products } = useProductValue();
+  const products = useSelector(productSelector);
+
   return (
     <div className={styles.productGrid}>
       <div className={styles.grid}>

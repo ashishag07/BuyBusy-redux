@@ -8,14 +8,15 @@ import styles from "./Filter.module.css";
 // dummy data
 import products from "../../dummyData";
 
-// custom contex
-import { useProductValue } from "../context/productContext";
+// redux
+import { useDispatch } from "react-redux";
+import { productActions } from "../../redux/reducers/productReducer";
 
 //************************************************************* */
 function Filter() {
   const [price, setPrice] = useState({ x: 12000 });
   const [selectedCategory, setSelectedCategory] = useState([]);
-  const { setProducts } = useProductValue();
+  const dispatch = useDispatch();
 
   const handleSelectCategory = (e) => {
     // check if it is already selected
@@ -31,19 +32,19 @@ function Filter() {
   useEffect(() => {
     let filteredProducts;
     if (selectedCategory.length === 0) {
-      return setProducts(products);
+      dispatch(productActions.loadProducts(products));
     } else {
       filteredProducts = products.filter((prod) =>
         selectedCategory.includes(prod.category)
       );
-      return setProducts(filteredProducts);
+      dispatch(productActions.loadProducts(filteredProducts));
     }
-  }, [selectedCategory, setProducts]);
+  }, [selectedCategory, dispatch]);
 
   useEffect(() => {
     const filteredProducts = products.filter((prod) => prod.price <= price.x);
-    setProducts(filteredProducts);
-  }, [price, setProducts]);
+    dispatch(productActions.loadProducts(filteredProducts));
+  }, [price, dispatch]);
 
   return (
     <div className={styles.heroSidebar}>

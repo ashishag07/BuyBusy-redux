@@ -7,17 +7,18 @@ import dummyData from "../../dummyData";
 // custom components
 import Hero from "../../components/Hero/Hero";
 
-// custom context
-import { useProductValue } from "../../components/context/productContext";
+// redux
+import { useDispatch } from "react-redux";
+import { productActions } from "../../redux/reducers/productReducer";
 
 //************************************************************ */
 // Home page starts
 function Home() {
-  const { setProducts } = useProductValue();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setProducts(dummyData);
-  }, [setProducts]);
+    dispatch(productActions.loadProducts(dummyData));
+  }, [dispatch]);
 
   return <Hero />;
 }

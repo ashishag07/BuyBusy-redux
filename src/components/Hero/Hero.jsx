@@ -1,5 +1,3 @@
-// external modules
-
 // internal modules
 import styles from "./Hero.module.css";
 
@@ -10,17 +8,20 @@ import products from "../../dummyData";
 import Filter from "../Filter/Filter";
 import ProductList from "../ProductList/ProductList";
 
-//custom context
-import { useProductValue } from "../context/productContext";
+// redux
+import { useDispatch } from "react-redux";
+import { productActions } from "../../redux/reducers/productReducer";
 
 //******************************************* */
 function Hero() {
-  const { setProducts } = useProductValue();
+  const dispatch = useDispatch();
 
   const searchInputItem = (e) => {
-    setProducts(
-      products.filter((prod) =>
-        prod.name.toLowerCase().includes(e.target.value.toLowerCase())
+    dispatch(
+      productActions.loadProducts(
+        products.filter((prod) =>
+          prod.name.toLowerCase().includes(e.target.value.toLowerCase())
+        )
       )
     );
   };
