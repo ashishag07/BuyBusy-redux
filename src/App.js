@@ -12,7 +12,6 @@ import Order from "./pages/Order/Order";
 import Cart from "./pages/Cart/Cart";
 
 // custom context
-import ProductProvider from "./components/context/productContext";
 import CartProvider from "./components/context/cartContext";
 import OrderProvider from "./components/context/orderContext";
 
@@ -66,13 +65,11 @@ function App() {
   ]);
 
   return (
-    <ProductProvider>
-      <CartProvider>
-        <OrderProvider>
-          <RouterProvider router={router} />
-        </OrderProvider>
-      </CartProvider>
-    </ProductProvider>
+    <CartProvider>
+      <OrderProvider>
+        <RouterProvider router={router} />
+      </OrderProvider>
+    </CartProvider>
   );
 }
 
