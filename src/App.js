@@ -12,7 +12,6 @@ import Order from "./pages/Order/Order";
 import Cart from "./pages/Cart/Cart";
 
 // custom context
-import CartProvider from "./components/context/cartContext";
 import OrderProvider from "./components/context/orderContext";
 
 // redux
@@ -65,11 +64,9 @@ function App() {
   ]);
 
   return (
-    <CartProvider>
-      <OrderProvider>
-        <RouterProvider router={router} />
-      </OrderProvider>
-    </CartProvider>
+    <OrderProvider>
+      <RouterProvider router={router} />
+    </OrderProvider>
   );
 }
 
