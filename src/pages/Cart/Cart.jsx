@@ -5,15 +5,15 @@ import styles from "./Cart.module.css";
 import { Link } from "react-router-dom";
 
 // custom context
-import { useCartValue } from "../../components/context/cartContext";
 import { useOrderVal } from "../../components/context/orderContext";
 
+import { useSelector, useDispatch } from "react-redux";
+import { cartActions, cartSelector } from "../../redux/reducers/cartReducer";
 //-------------------------------------------------------------
 function Cart() {
-  const { cartItems, clearCart, removeItem, removeSingleItem, addToCart } =
-    useCartValue();
-
   const { addOrder } = useOrderVal();
+  const { cartItems } = useSelector(cartSelector);
+  const dispatch = useDispatch();
 
   // conditional rendering
   if (cartItems.length === 0) {
@@ -46,19 +46,24 @@ function Cart() {
               <div className={styles.qtyControls}>
                 <div
                   className={styles.qtyBtn}
-                  onClick={() => removeSingleItem(item)}
+                  onClick={() =>
+                    dispatch(cartActions.decreaseItemQuantityByOne(item))
+                  }
                 >
                   -
                 </div>
                 <h2>{item.qty}</h2>
-                <div className={styles.qtyBtn} onClick={() => addToCart(item)}>
+                <div
+                  className={styles.qtyBtn}
+                  onClick={() => dispatch(cartActions.addToCart(item))}
+                >
                   +
                 </div>
               </div>
 
               <div
                 className={styles.removeBtn}
-                onClick={() => removeItem(item)}
+                onClick={() => dispatch(cartActions.removeItemFromCart(item))}
               >
                 Remove Item
               </div>
@@ -95,7 +100,10 @@ function Cart() {
           </p>
         </div>
         <div className={styles.btnContainer}>
-          <div className={styles.btn} onClick={clearCart}>
+          <div
+            className={styles.btn}
+            onClick={() => dispatch(cartActions.clearCart())}
+          >
             Clear Cart
           </div>
           <div className={styles.btn} onClick={() => addOrder(cartItems)}>

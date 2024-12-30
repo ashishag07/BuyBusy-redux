@@ -4,17 +4,16 @@ import styles from "./ProductCard.module.css";
 // external modules
 import { Link } from "react-router-dom";
 
-// custom context
-import { useCartValue } from "../context/cartContext";
-
 // redux
 import { useSelector } from "react-redux";
 import { userSelector } from "../../redux/reducers/userReducer";
-
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../redux/reducers/cartReducer";
 //--------------------------------------------------------
 function ProductCard({ product }) {
-  const { addToCart } = useCartValue();
+  // const { addToCart } = useCartValue();
   const activeUser = useSelector(userSelector);
+  const dispatch = useDispatch();
 
   return (
     <div className={styles.card}>
@@ -31,7 +30,11 @@ function ProductCard({ product }) {
         <h3>&#x20b9; {product.price}</h3>
       </div>
       {activeUser ? (
-        <div className={styles.cardBtn} onClick={() => addToCart(product)}>
+        // <div className={styles.cardBtn} onClick={() => addToCart(product)}>
+        <div
+          className={styles.cardBtn}
+          onClick={() => dispatch(cartActions.addToCart(product))}
+        >
           Add To Cart
         </div>
       ) : (

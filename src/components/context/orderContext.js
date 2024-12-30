@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
-import { useCartValue } from "./cartContext";
+
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../redux/reducers/cartReducer";
 const orderContext = createContext();
 
 export const useOrderVal = () => {
@@ -10,7 +12,7 @@ export const useOrderVal = () => {
 
 const OrderProvider = ({ children }) => {
   const [orders, setOrders] = useState([]);
-  const { clearCart } = useCartValue();
+  const dispatch = useDispatch();
 
   const addOrder = (cartItem) => {
     const cartObj = {
@@ -20,7 +22,8 @@ const OrderProvider = ({ children }) => {
     };
 
     setOrders((prev) => [...prev, cartObj]);
-    clearCart();
+    // clearCart();
+    dispatch(cartActions.clearCart());
     toast.success("Your Order is placed successfully !!");
   };
   return (
