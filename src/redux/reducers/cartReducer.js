@@ -1,9 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { orderActions } from "./orderReducer";
 import { toast } from "react-toastify";
 
 const initialState = {
   cartItems: [],
 };
+
+function helperClearCart(state, action) {
+  state.cartItems = [];
+}
 
 const cartSlice = createSlice({
   name: "cart",
@@ -22,9 +27,7 @@ const cartSlice = createSlice({
       }
       toast.success("Item is added to the Cart");
     },
-    clearCart: (state, action) => {
-      state.cartItems = [];
-    },
+    clearCart: helperClearCart,
     decreaseItemQuantityByOne: (state, action) => {
       const product = action.payload;
       const existedProductIndex = state.cartItems.findIndex(
@@ -46,6 +49,10 @@ const cartSlice = createSlice({
       state.cartItems.splice(existedProductIndex, 1);
       toast.success("Item is removed successfully !!");
     },
+  },
+
+  extraReducers: (builder) => {
+    builder.addCase(orderActions.addOrder, helperClearCart);
   },
 });
 
