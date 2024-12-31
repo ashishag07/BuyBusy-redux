@@ -1,12 +1,13 @@
 // internal modules
 import styles from "./Order.module.css";
 
-// custom context
-import { useOrderVal } from "../../components/context/orderContext";
+// redux
+import { useSelector } from "react-redux";
+import { orderSelector } from "../../redux/reducers/orderReducer";
 
 //--------------------------------------------------------
 function Order() {
-  const { orders } = useOrderVal();
+  const orders = useSelector(orderSelector);
 
   if (orders.length === 0) {
     return (

@@ -4,14 +4,12 @@ import styles from "./Cart.module.css";
 // external modules
 import { Link } from "react-router-dom";
 
-// custom context
-import { useOrderVal } from "../../components/context/orderContext";
-
+// redux
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions, cartSelector } from "../../redux/reducers/cartReducer";
+import { orderActions } from "../../redux/reducers/orderReducer";
 //-------------------------------------------------------------
 function Cart() {
-  const { addOrder } = useOrderVal();
   const { cartItems } = useSelector(cartSelector);
   const dispatch = useDispatch();
 
@@ -106,7 +104,10 @@ function Cart() {
           >
             Clear Cart
           </div>
-          <div className={styles.btn} onClick={() => addOrder(cartItems)}>
+          <div
+            className={styles.btn}
+            onClick={() => dispatch(orderActions.addOrder(cartItems))}
+          >
             Purchase
           </div>
         </div>
