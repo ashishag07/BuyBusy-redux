@@ -11,9 +11,6 @@ import Register from "./pages/Register/Register";
 import Order from "./pages/Order/Order";
 import Cart from "./pages/Cart/Cart";
 
-// custom context
-import OrderProvider from "./components/context/orderContext";
-
 // redux
 import { useSelector } from "react-redux";
 import { userSelector } from "./redux/reducers/userReducer";
@@ -63,11 +60,7 @@ function App() {
     },
   ]);
 
-  return (
-    <OrderProvider>
-      <RouterProvider router={router} />
-    </OrderProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
